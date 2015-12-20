@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+"http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.custom.i18n.resources" value="mess"/>
+	<!-- 临时文件存放路径 -->
+    <constant name="struts.multipart.saveDir" value="/upload" />
+  	<!-- 允许动态方法调用 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+	<!-- //文件上传的最大值  在此我設置為100M-->
+	<constant name="struts.multipart.maxSize" value="104857600"/> 
+	<package name="default" namespace="/" extends="struts-default">
+		<action name="ValidateCode" class="com.pds.action.ValidateCode">
+			<result type="stream" name="success">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">imageStream</param>
+				<param name="bufferSize">2048</param>
+			</result>
+		</action>
+		<action name="Register" class="com.pds.action.RegisterAction">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="token"></interceptor-ref>
+			<result>/WEB-INF/jsp/login.jsp</result>
+			<result name="invalid.token">/WEB-INF/jsp/register.jsp</result>
+			<result name="input">/WEB-INF/jsp/register.jsp</result>
+			<result type ="dispatcher" name="error">/WEB-INF/jsp/register.jsp</result>
+		</action>
+		<action name="Login" class="com.pds.action.LoginAction">
+			<result>/WEB-INF/jsp/index.jsp</result>
+			<result name="error" type="dispatcher">/WEB-INF/jsp/login.jsp</result>
+		</action>
+		<action name="Logout" class="com.pds.action.LogoutAction">
+			<result>/WEB-INF/jsp/login.jsp</result>
+		</action>
+		<action name="Update" class="com.pds.action.UpdateAction">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="token"></interceptor-ref>
+			<result>/WEB-INF/jsp/index.jsp</result>
+			<result name="invalid.token">/WEB-INF/jsp/updateInfo.jsp</result>
+			<result name="error" type="dispatcher">/WEB-INF/jsp/updateInfo.jsp</result>
+		</action>
+		<action name="Upload" class="com.pds.action.UploadAction">
+		<interceptor-ref name="token" />
+		<interceptor-ref name="fileUpload">
+			<param name="allowedTypes">
+				image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/x-png, image/pjpeg
+			</param>
+			<param name="maximumSize">5242880</param>
+		</interceptor-ref>
+		<interceptor-ref name="defaultStack" />
+		<result name="invalid.token">/WEB-INF/jsp/error.jsp</result>
+		<result name="success">/WEB-INF/jsp/updateInfo.jsp</result>
+		<result name="input">/WEB-INF/jsp/updateInfo.jsp</result>
+		</action>
+		
+		<action name="WriteArticle" class="com.pds.action.ArticleAction" method="writeArticle">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="token"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/index.jsp</result>
+			<result name="error">/WEB-INF/jsp/writeArticle.jsp</result>
+			<result name="invalid.token">/WEB-INF/jsp/error.jsp</result>
+		</action>
+		
+		<action name="GetArticleDetail" class="com.pds.action.ArticleAction" method="getArticleDetail">
+			<result name="success">/WEB-INF/jsp/articleDetail.jsp</result>
+			<result name="error">/WEB-INF/jsp/error.jsp</result>
+		</action>
+		
+		<action name="Refresh" class="com.pds.action.ArticleAction" method="refresh">
+			<result name="success">/WEB-INF/jsp/displayArticle.jsp</result>
+			<result name="error">/WEB-INF/jsp/error.jsp</result>
+		</action>
+		
+		<action name="CommentArticle" class="com.pds.action.ArticleAction" method="CommentArticle">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="token"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/articleDetail.jsp</result>
+			<result name="error">/WEB-INF/jsp/error.jsp</result>
+			<result name="invalid.token">/WEB-INF/jsp/error.jsp</result>
+		</action>
+		
+		<action name="AttentionAction" class="com.pds.action.FriendAction" method="attention">
+			<result name="success">/WEB-INF/jsp/articleDetail.jsp</result>
+			<result name="error">/WEB-INF/jsp/error.jsp</result>
+		</action>
+		
+		<action name="*">
+			<result name="success">/WEB-INF/jsp/{1}.jsp</result>
+		</action>
+	</package>
+	
+	<package name="ajax" namespace="/ajax" extends="json-default">
+		<!-- 检验用户名是否存在 -->  
+        <action name="Check" class="com.pds.action.CheckAction">  
+            <!-- 返回类型为json 在sjon-default中定义 -->  
+            <result type="json" name="success">  
+                <!-- root的值对应要返回的值的属性 -->  
+                <!-- 这里的result值即是 对应action中的 result -->  
+                <!-- <param name="root">result</param> -->  
+            </result>  
+        </action>  
+        <action name="GetArticle" class="com.pds.action.GetArticleAction" method="getArticles">
+			<result type="json" name="success">/WEB-INF/jsp/displayArticle.jsp</result>
+		</action>
+		
+        <!-- <action name="Test" class="com.pds.action.TestAction">
+        	<result type="json" name="success">
+        		<param name="noCache">true</param>
+        		<param name="contentType">text/html</param>
+        	</result>
+        </action> -->
+	</package>
+</struts>    
