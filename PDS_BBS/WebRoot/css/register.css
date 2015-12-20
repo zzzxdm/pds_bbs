@@ -1,0 +1,47 @@
+body { 
+background: url("../image/reg_bg.jpg") repeat;
+text-align: center; 
+background-repeat: repeat-x;
+} 
+.table { 
+border: 1px solid #90BFFF; 
+width:820px; 
+} 
+.table tbody{
+	width:800px;
+	height:auto
+}
+tr { 
+font-family: ΢���ź�; 
+font-weight:800; 
+color: #448EF3; 
+} 
+input{ 
+border: 1px solid #448EF3; 
+color: #448EF3; 
+font-weight:bold; 
+font-family: "΢���ź�"; 
+height: 30px;
+line-height: 30px; 
+border-radius:5px; 
+} 
+.submit { 
+width: 150px; 
+height: 40px; 
+cursor :hand; 
+font-size: 20px; 
+color: #ffffff; 
+background-color: #448EF3; 
+border: 0px; 
+} 
+.thead { 
+height: 40px; background : #90BFFF; 
+font-family: "΢���ź�"; 
+font-size: 30px; 
+font-weight: 700; 
+color: #ffffff; 
+background: #90BFFF; 
+} 
+#3{ 
+margin-bottom: 100px; 
+} 
