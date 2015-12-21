@@ -62,13 +62,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="right">
             <div class="content" style="height:750px;overflow:auto">
                 <ul class="list-group" id="articles">
-                    
+                    <li style="text-align:center;margin:auto auto"><h4><span>正在加载文章列表，请稍后.....</span></h4></li>
                 </ul>
             </div>
             <div class="right-bottom">
             	<div class="pagelist" style="height:50px" align="center">
             		<ul class="pagination pagination-sm" id="pages" style="height:30px;margin:10px auto">
-	            		<li><span>正在加载文章列表，请稍后.....</span></li>
+	            		<span>......</span>
             		</ul>
 	            		<p>总条数：<span id="articlesCount"></span> 条  当前页数：<span id="pageCount"></span> 页</p>
             	</div>

@@ -5,11 +5,13 @@ import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.pds.dao.impl.FriendDAO;
@@ -17,9 +19,10 @@ import com.pds.dao.impl.UserDAO;
 import com.pds.pojo.Friend;
 import com.pds.pojo.User;
 
-public class FriendAction extends ActionSupport {
+public class FriendAction extends ActionSupport implements SessionAware{
 	
 	private String friendId;
+	private Map<String, Object> session;
 	@Override
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
@@ -41,8 +44,7 @@ public class FriendAction extends ActionSupport {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		HttpSession session = ServletActionContext.getRequest().getSession();
-		User user = (User) session.getAttribute("user");
+		User user = (User) session.get("user");
 		if(user == null){
 			User temp_user = new User();
 			temp_user.setId(fId);
@@ -77,5 +79,11 @@ public class FriendAction extends ActionSupport {
 
 	public void setFriendId(String friendId) {
 		this.friendId = friendId;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> arg0) {
+		// TODO Auto-generated method stub
+		this.session = arg0;
 	}
 }

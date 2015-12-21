@@ -36,20 +36,22 @@ public class UploadAction extends ActionSupport implements SessionAware{
 	{
 	   String filePath = "";
 	   User user = (User) session.get("user");
-	   String userName = user.getUsername();
-		try {
-			//这里得到的是文件在硬盘上的地址  稍后需要处理一下
-			filePath = FileUpload.imgFileUpload(pic, picFileName, userName);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if ((filePath!=null) ||(filePath!=""))
-		{
-			new UserDaoImpl().updateUserImgByUserName(userName, filePath.substring(filePath.indexOf("\\PDS_BBS")));
-		    this.addActionMessage("文件路径为:"+filePath);	
-		}
-		return SUCCESS;
+	   if(user != null){
+		   String userName = user.getUsername();
+			try {
+				//这里得到的是文件在硬盘上的地址  稍后需要处理一下
+				filePath = FileUpload.imgFileUpload(pic, picFileName, userName);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if ((filePath!=null) ||(filePath!="")){
+				new UserDaoImpl().updateUserImgByUserName(userName, filePath.substring(filePath.indexOf("\\PDS_BBS")));
+			    this.addActionMessage("文件路径为:"+filePath);	
+			    return SUCCESS;
+			}
+	   }
+		return null;
 	}
 	@Override
 	public void setSession(Map<String, Object> arg0) {
