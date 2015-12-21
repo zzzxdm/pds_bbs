@@ -62,7 +62,7 @@ public class CheckAction extends ActionSupport implements SessionAware{
 			}
 	        if(flag == true){   
 	            pw.write("用户名已经存在!"); 
-//	            session.remove(userName);
+	            session.remove(userName);
 	        }else{   
 	            pw.write("可以使用!");   
 	        }   
@@ -91,7 +91,7 @@ public class CheckAction extends ActionSupport implements SessionAware{
 			PrintWriter pw = res.getWriter();
 	        if(currentPwd.equals(password)){   
 	            pw.write("密码正确!");   
-	            session.remove(userName);
+	            session.remove(userName+":");
 	        }else{   
 	            pw.write("密码错误!");   
 	        }   
