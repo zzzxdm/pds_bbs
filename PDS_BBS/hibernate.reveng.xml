@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table name="article" catalog="bbs" class="com.pds.Article">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+	<table name="user" catalog="bbs" class="com.pds.User">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+	<table name="classes" schema="dbo" catalog="jwgl"
+		class="com.zzz.pojo.Classes">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+	<table name="dept" schema="dbo" catalog="jwgl"
+		class="com.zzz.pojo.Dept">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+	<table name="std_union" schema="dbo" catalog="jwgl"
+		class="com.zzz.pojo.StdUnion">
+	</table>
+	<table name="student" schema="dbo" catalog="jwgl"
+		class="com.zzz.pojo.Student">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+	<table name="admin" catalog="bbs" class="com.pds.pojo.Admin">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+	<table name="data" catalog="bbs" class="com.pds.pojo.Data">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+	<table name="friend" catalog="bbs" class="com.pds.pojo.Friend">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+<table name="comment" catalog="bbs">
+	<primary-key>
+		
+	</primary-key>
+</table>
+</hibernate-reverse-engineering>
